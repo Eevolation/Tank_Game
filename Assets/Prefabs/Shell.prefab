@@ -112,7 +112,7 @@ MonoBehaviour:
   MaxDamage: 2
   ExplosionRadius: 5
   ExplosionForce: 100
-  ExplosionParticles: {fileID: 19887218, guid: 6ec94bebfeb43a44c9a3811fdf0e916e, type: 3}
+  ExplosionParticles: {fileID: 8191616567120939828}
 --- !u!54 &8917247969787576807
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -205,6 +205,12 @@ PrefabInstance:
 --- !u!4 &8191616567102598014 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 480312, guid: 6ec94bebfeb43a44c9a3811fdf0e916e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8191616567102783302}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8191616567120939828 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19887218, guid: 6ec94bebfeb43a44c9a3811fdf0e916e,
     type: 3}
   m_PrefabInstance: {fileID: 8191616567102783302}
   m_PrefabAsset: {fileID: 0}
