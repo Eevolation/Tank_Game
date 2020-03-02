@@ -12,7 +12,7 @@ public class TankHealth : MonoBehaviour
     // the tank dies
     public GameObject m_ExplosionPrefab;
 
-    private float m_CurrentHealth;
+    public float m_CurrentHealth;
     private bool m_Dead;
     // The particle system that will play when the tank is destroyed
     private ParticleSystem m_ExplosionParticle;

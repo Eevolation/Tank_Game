@@ -7,13 +7,50 @@ public class Xp : MonoBehaviour
     public int XP;
     public int Currentlevel;
     public float damage = PlayerShell.damage;
-    private float maxhealth = PlayerTankHealth.m_StartingHealth;
-    private float currenthealth = PlayerTankHealth.m_CurrentHealth;
+    public TankHealth playerHealth;
+    public TankHealth Enemy1Health;
+
+    private float maxhealth;
+    private float currenthealth;
+
+    private void Start()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
+        {
+            playerHealth = player.GetComponent<TankHealth>();
+            if (playerHealth)
+            {
+                maxhealth = playerHealth.m_StartingHealth;
+                currenthealth = playerHealth.m_CurrentHealth;
+                return;
+            }
+        }
+        GameObject enemy1 = GameObject.FindGameObjectWithTag("Enemy1");
+        if(enemy1)
+        {
+            Enemy1Health = enemy1.GetComponent<TankHealth>();
+            if (Enemy1Health)
+            {
+                maxhealth = Enemy1Health.m_StartingHealth;
+                currenthealth = Enemy1Health.m_CurrentHealth;
+                return;
+            }
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateXp(5);
+        
+    }
+
+    public void EnemyXP()
+    {
+        if (Enemy1Health.m_StartingHealth <= 0)
+        {
+            UpdateXp(100);
+        }
     }
 
     public void UpdateXp(int xp)
@@ -31,8 +68,8 @@ public class Xp : MonoBehaviour
             }
             if(Currentlevel == 3)
             {
-                PlayerTankHealth.m_StartingHealth += 5;
-                PlayerTankHealth.m_CurrentHealth = PlayerTankHealth.m_StartingHealth;
+                playerHealth.m_StartingHealth += 5;
+                playerHealth.m_CurrentHealth = playerHealth.m_StartingHealth;
             }
             if (Currentlevel == 4) ;
             {

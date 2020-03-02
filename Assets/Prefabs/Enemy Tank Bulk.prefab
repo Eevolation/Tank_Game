@@ -383,7 +383,7 @@ GameObject:
   - component: {fileID: 1206166484428514615}
   m_Layer: 0
   m_Name: Enemy Tank Bulk
-  m_TagString: Untagged
+  m_TagString: Bulk_Enemy_Gold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -498,6 +498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StartingHealth: 250
   m_ExplosionPrefab: {fileID: 122668, guid: 5f53e2b760f0b2a4c8b27bb6f25b3c90, type: 3}
+  m_CurrentHealth: 0
 --- !u!1 &8587354219373468432
 GameObject:
   m_ObjectHideFlags: 0
