@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 public class TankMovement : MonoBehaviour
 {
     public float m_Speed = 12f; // How fast the tank moves forward and back
@@ -7,6 +8,10 @@ public class TankMovement : MonoBehaviour
     private Rigidbody m_Rigidbody;
     private float m_MovementInputValue; // The current value of the movement input
     private float m_TurnInputValue; // the current value of the turn input
+
+    public float doubleSpeedTimer;
+
+    public Image speedClock;
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -33,6 +38,16 @@ public class TankMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        float SpeedFactor = 1;
+
+        if(doubleSpeedTimer > 0)
+        {
+            doubleSpeedTimer += Time.deltaTime;
+            SpeedFactor = 2;
+
+            speedClock.fillAmount = doubleSpeedTimer / 10.0f;
+
+        }
         Move();
         Turn();
     }

@@ -7,51 +7,24 @@ public class Xp : MonoBehaviour
     public int XP;
     public int Currentlevel;
     public float damage = PlayerShell.damage;
-    public TankHealth playerHealth;
-    public TankHealth Enemy1Health;
 
-    private float maxhealth;
-    private float currenthealth;
+    public static Xp thePlayerXP;
 
-    private void Start()
-    {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject player in players)
+    void Start()
+    { 
+        PlayerShell.damage = 30;
+
+        if (thePlayerXP == null)
         {
-            playerHealth = player.GetComponent<TankHealth>();
-            if (playerHealth)
-            {
-                maxhealth = playerHealth.m_StartingHealth;
-                currenthealth = playerHealth.m_CurrentHealth;
-                return;
-            }
+            DontDestroyOnLoad(gameObject);
+            thePlayerXP = this;
         }
-        GameObject enemy1 = GameObject.FindGameObjectWithTag("Enemy1");
-        if(enemy1)
+        else
         {
-            Enemy1Health = enemy1.GetComponent<TankHealth>();
-            if (Enemy1Health)
-            {
-                maxhealth = Enemy1Health.m_StartingHealth;
-                currenthealth = Enemy1Health.m_CurrentHealth;
-                return;
-            }
+            Destroy(gameObject);
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void EnemyXP()
-    {
-        if (Enemy1Health.m_StartingHealth <= 0)
-        {
-            UpdateXp(100);
-        }
-    }
 
     public void UpdateXp(int xp)
     {
@@ -68,10 +41,9 @@ public class Xp : MonoBehaviour
             }
             if(Currentlevel == 3)
             {
-                playerHealth.m_StartingHealth += 5;
-                playerHealth.m_CurrentHealth = playerHealth.m_StartingHealth;
+                PlayerShell.damage += 5;
             }
-            if (Currentlevel == 4) ;
+            if (Currentlevel == 4) 
             {
                 PlayerShell.damage += 5;
             }

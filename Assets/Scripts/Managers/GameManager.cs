@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+class GameManager : MonoBehaviour
 {
     // Reference to the enemy Text to display winning text, etc
     public Text m_MessageText;
@@ -19,13 +19,14 @@ public class GameManager : MonoBehaviour
             return m_gameTime; 
         } 
     }
-
+    
     public enum GameState
     {
-        Start, 
-        Playing, 
-        GameOver
+        Level_Start, 
+        Level_Playing, 
+        GameOver,
     };
+
 
     private GameState m_GameState;
     public GameState State 
@@ -38,7 +39,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        m_GameState = GameState.Start;
+        
+        m_GameState = GameState.Level_Start;
     }
 
     private void Start()
@@ -56,12 +58,12 @@ public class GameManager : MonoBehaviour
     {
         switch (m_GameState)
         {
-            case GameState.Start:
+            case GameState.Level_Start:
                 if(Input.GetKeyUp(KeyCode.Return) == true)
                 {
                     m_TimerText.gameObject.SetActive(true);
                     m_MessageText.text = "";
-                    m_GameState = GameState.Playing;
+                    m_GameState = GameState.Level_Playing;
 
                     for (int i = 0; i < m_Tanks.Length; i++)
                     {
@@ -69,7 +71,7 @@ public class GameManager : MonoBehaviour
                     }
                 }
                 break;
-            case GameState.Playing:
+            case GameState.Level_Playing:
                 bool isGameOver = false;
 
                 m_gameTime += Time.deltaTime;
@@ -87,15 +89,15 @@ public class GameManager : MonoBehaviour
                 if(isGameOver == true)
                 {
                     m_GameState = GameState.GameOver;
-                    m_TimerText.gameObject.SetActive(false);
 
                     if (IsPlayerDead() == true)
                     {
-                        m_MessageText.text = "TRY AGAIN";
+                        m_MessageText.text = "you died try again";
                     }
                     else
                     {
-                        m_MessageText.text = "WINNER!";
+                        m_MessageText.text = "into the dungeon!";
+                        //Application.LoadLevel(1);
                     }
                 }
                 break;
@@ -103,9 +105,10 @@ public class GameManager : MonoBehaviour
                 if(Input.GetKeyUp(KeyCode.Return) == true)
                 {
                     m_gameTime = 0;
-                    m_GameState = GameState.Playing;
+                    m_GameState = GameState.Level_Playing;
                     m_MessageText.text = "";
                     m_TimerText.gameObject.SetActive(true);
+                    Application.LoadLevel(0);
 
                     for(int i = 0; i < m_Tanks.Length; i++)
                     {

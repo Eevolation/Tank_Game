@@ -421,7 +421,8 @@ GameObject:
   - component: {fileID: 2559883097297201530}
   - component: {fileID: 2559883097297201528}
   - component: {fileID: 1710557466}
-  - component: {fileID: 2924306697091892842}
+  - component: {fileID: -1088159765746010446}
+  - component: {fileID: 1460593249896478732}
   m_Layer: 0
   m_Name: Player Tank
   m_TagString: Player
@@ -489,7 +490,7 @@ MonoBehaviour:
   m_Shell: {fileID: 8917247969787576807, guid: 0eab5ef64b5092e40b630eef8de839cd, type: 3}
   m_FireTransform: {fileID: 441647006}
   m_LaunchForce: 30
---- !u!114 &2924306697091892842
+--- !u!114 &-1088159765746010446
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -498,7 +499,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 2559883098059857934}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5293a22d39996604088e62796819f500, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d4802c87128f6f4bafdece1dfb23bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  XP: 0
+  Currentlevel: 0
+  damage: 0
+  Health: {fileID: 0}
+--- !u!114 &1460593249896478732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2559883098059857934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe6cd53c9ecc0c040b786e2664d8823b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StartingHealth: 100
   m_ExplosionPrefab: {fileID: 0}
+  m_CurrentHealth: 0

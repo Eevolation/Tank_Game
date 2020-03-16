@@ -7,15 +7,16 @@ public class TankHealth : MonoBehaviour
 {
     // The amount of health each tank starts with
     public float m_StartingHealth = 100f;
-
     // A prefab that will be instantiated in awake, then used whenever
     // the tank dies
     public GameObject m_ExplosionPrefab;
 
-    public float m_CurrentHealth;
+    public static float m_CurrentHealth;
     private bool m_Dead;
     // The particle system that will play when the tank is destroyed
     private ParticleSystem m_ExplosionParticle;
+
+    public int xp = 100;
 
     private void Awake()
     {
@@ -74,17 +75,14 @@ public class TankHealth : MonoBehaviour
         // Turn the tank off
         gameObject.SetActive(false);
 
+        // if this is an enemy, give the player XP!
+        Xp.thePlayerXP.UpdateXp(xp);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
+
