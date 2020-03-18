@@ -11,7 +11,7 @@ public class TankHealth : MonoBehaviour
     // the tank dies
     public GameObject m_ExplosionPrefab;
 
-    public static float m_CurrentHealth;
+    public float m_CurrentHealth;
     private bool m_Dead;
     // The particle system that will play when the tank is destroyed
     private ParticleSystem m_ExplosionParticle;
@@ -45,6 +45,7 @@ public class TankHealth : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        Debug.Log(name + " has taken " + amount + " damage! (" + m_CurrentHealth + " -> " + (m_CurrentHealth-amount) + ")");
         // Reduce current health by the amount of the damage done
         m_CurrentHealth -= amount;
 

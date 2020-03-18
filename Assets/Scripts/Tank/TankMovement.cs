@@ -10,6 +10,7 @@ public class TankMovement : MonoBehaviour
     private float m_TurnInputValue; // the current value of the turn input
 
     public float doubleSpeedTimer;
+    public float SpeedFactor = 1;
 
     public Image speedClock;
     private void Awake()
@@ -38,15 +39,17 @@ public class TankMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        float SpeedFactor = 1;
-
         if(doubleSpeedTimer > 0)
         {
-            doubleSpeedTimer += Time.deltaTime;
+            doubleSpeedTimer -= Time.deltaTime;
             SpeedFactor = 2;
 
             speedClock.fillAmount = doubleSpeedTimer / 10.0f;
 
+        }
+        else if(doubleSpeedTimer <= 0)
+        {
+            SpeedFactor = 1;
         }
         Move();
         Turn();
@@ -56,7 +59,7 @@ public class TankMovement : MonoBehaviour
         // create a vector in the direction the tank is facing with a magnitude
         // based on the input, speed and time between frames
         Vector3 movement = transform.forward * m_MovementInputValue * m_Speed *
-       Time.deltaTime;
+       Time.deltaTime * SpeedFactor;
         // Apply this movement to the rigidbody's position
         m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
     }

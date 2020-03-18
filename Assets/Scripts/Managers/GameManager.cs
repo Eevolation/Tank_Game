@@ -11,6 +11,9 @@ class GameManager : MonoBehaviour
 
     public GameObject[] m_Tanks;
 
+    public float playerDamage;
+    public float enemyDamage;
+
     private float m_gameTime = 0;
     public float GameTime 
     {
@@ -25,6 +28,7 @@ class GameManager : MonoBehaviour
         Level_Start, 
         Level_Playing, 
         GameOver,
+        Level2,
     };
 
 
@@ -56,6 +60,8 @@ class GameManager : MonoBehaviour
 
     private void Update()
     {
+        playerDamage = PlayerShell.damage;
+
         switch (m_GameState)
         {
             case GameState.Level_Start:
@@ -72,21 +78,21 @@ class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.Level_Playing:
-                bool isGameOver = false;
+                bool Level1isGameOver = false;
 
                 m_gameTime += Time.deltaTime;
-                int seconds = Mathf.RoundToInt(m_gameTime);
-                m_TimerText.text = string.Format("{0:D2}:{1:D2}", (seconds / 60), (seconds % 60));
+                int level1seconds = Mathf.RoundToInt(m_gameTime);
+                m_TimerText.text = string.Format("{0:D2}:{1:D2}", (level1seconds / 60), (level1seconds % 60));
                 
                 if(OneTankLeft() == true)
                 {
-                    isGameOver = true;
+                    Level1isGameOver = true;
                 }
                 else if (IsPlayerDead() == true)
                 {
-                    isGameOver = true;
+                    Level1isGameOver = true;
                 }
-                if(isGameOver == true)
+                if(Level1isGameOver == true)
                 {
                     m_GameState = GameState.GameOver;
 
@@ -97,7 +103,8 @@ class GameManager : MonoBehaviour
                     else
                     {
                         m_MessageText.text = "into the dungeon!";
-                        //Application.LoadLevel(1);
+                        Application.LoadLevel(1);
+                        m_GameState = GameState.Level2;
                     }
                 }
                 break;
@@ -116,13 +123,45 @@ class GameManager : MonoBehaviour
                     }
                 }
                 break;
+            case GameState.Level2:
+                if (Input.GetKeyUp(KeyCode.Return) == true)
+                {
+                    bool Level2isGameOver = false;
+
+                    m_gameTime += Time.deltaTime;
+                    int level2seconds = Mathf.RoundToInt(m_gameTime);
+                    m_TimerText.text = string.Format("{0:D2}:{1:D2}", (level2seconds / 60), (level2seconds % 60));
+
+                    if (OneTankLeft() == true)
+                    {
+                        Level2isGameOver = true;
+                    }
+                    else if (IsPlayerDead() == true)
+                    {
+                        Level2isGameOver = true;
+                    }
+                    if (Level2isGameOver == true)
+                    {
+                        m_GameState = GameState.GameOver;
+
+                        if (IsPlayerDead() == true)
+                        {
+                            m_MessageText.text = "you died try again";
+                        }
+                        else
+                        {
+                            m_MessageText.text = "Victory";
+                        }
+                    }
+                }
+                break;
         }
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             Application.Quit();
         }
     }
-    private bool OneTankLeft()
+    bool OneTankLeft()
     {
         int numTanksLeft = 0;
 
@@ -136,7 +175,7 @@ class GameManager : MonoBehaviour
         return numTanksLeft <= 1;
     }
 
-    private bool IsPlayerDead()
+    bool IsPlayerDead()
     {
         for(int i = 0; i < m_Tanks.Length; i++)
         {

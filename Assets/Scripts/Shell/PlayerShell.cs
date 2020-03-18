@@ -41,10 +41,6 @@ public class PlayerShell : MonoBehaviour
 
             if (targetHealth != null)
             {
-                // Calculated the amount of damage the target should take
-                // based on it's distance from the shell.
-                // damage = CalculateDamage(targetRigidbody.position);
-
                 // Deal this damage to the tank
                 targetHealth.TakeDamage(damage);
             }
@@ -61,27 +57,6 @@ public class PlayerShell : MonoBehaviour
 
         // Destroy the shell
         Destroy(gameObject);
-    }
-
-    private float CalculateDamage(Vector3 targetPosition)
-    {
-        // Create a vector from the shell to target
-        Vector3 explosionToTarget = targetPosition - transform.position;
-
-        // Calculate the distance from the shell to the target
-        float explosionDistance = explosionToTarget.magnitude;
-
-        // Calculate the proportion of the maximum distance (the explosionRadius)
-        // the target is away
-        float relativeDistance = (ExplosionRadius - explosionDistance) / ExplosionRadius;
-
-        // Calculate damage as this proportion of the maximum possible damage
-        damage = relativeDistance * MaxDamage;
-
-        // Make sure that the minimum damage is always 0
-        damage = Mathf.Max(30f, damage);
-
-        return damage;
     }
 
     // Update is called once per frame

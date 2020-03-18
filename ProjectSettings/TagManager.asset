@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy1
   - Bulk_Enemy_Gold
+  - PowerUpSpeed
   layers:
   - Default
   - TransparentFX
