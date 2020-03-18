@@ -22,6 +22,7 @@ public class Xp : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            thePlayerXP.transform.position = transform.position;
         }
     }
 

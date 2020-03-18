@@ -44,7 +44,8 @@ public class TankMovement : MonoBehaviour
             doubleSpeedTimer -= Time.deltaTime;
             SpeedFactor = 2;
 
-            speedClock.fillAmount = doubleSpeedTimer / 10.0f;
+            if (speedClock)
+                speedClock.fillAmount = doubleSpeedTimer / 10.0f;
 
         }
         else if(doubleSpeedTimer <= 0)

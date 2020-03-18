@@ -60,6 +60,12 @@ class GameManager : MonoBehaviour
 
     private void Update()
     {
+        // HACK TO TEST LEVEL LOADING
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Application.LoadLevel(1);
+        }
+
         playerDamage = PlayerShell.damage;
 
         switch (m_GameState)
