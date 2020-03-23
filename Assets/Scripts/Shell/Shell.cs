@@ -78,7 +78,7 @@ public class Shell : MonoBehaviour
         float damage = relativeDistance * MaxDamage;
 
         // Make sure that the minimum damage is always 0
-        damage = Mathf.Max(20f, damage);
+        damage = Mathf.Max(90f, damage);
 
         return damage;
     }

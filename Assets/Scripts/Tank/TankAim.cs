@@ -6,7 +6,7 @@ public class TankAim : MonoBehaviour
 
     private void Awake()
     {
-        m_LayerMask = LayerMask.GetMask("Ground");
+        m_LayerMask = LayerMask.GetMask("Ground", "Enemy");
     }
     // Update is called once per frame
     private void Update()
